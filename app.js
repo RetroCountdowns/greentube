@@ -40,8 +40,19 @@ document.getElementById("myChannel").onclick = () => {/* … */}
 document.getElementById("createChannel").onclick = () => {/* … */}
 document.getElementById("studio").onclick = () => {
   window.location.href = "https://greentube.example.com/studio";
-};
-document.getElementById("logout").onclick = () => {
-  // import { getAuth } z logincheck.js
-  window.location.href = "https://greenblox-creator.github.io/accounts";
+};import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
+const auth = getAuth();
+
+document.getElementById("logout").addEventListener("click", () => {
+  signOut(auth)
+    .then(() => {
+      // ✅ Po wylogowaniu przekieruj do logowania
+      window.location.href = "https://greenblox-creator.github.io/accounts";
+    })
+    .catch((error) => {
+      console.error("Błąd wylogowania:", error);
+    });
+});
+
 };
